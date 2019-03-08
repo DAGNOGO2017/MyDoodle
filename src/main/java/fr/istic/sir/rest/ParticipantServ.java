@@ -1,6 +1,4 @@
 package fr.istic.sir.rest;
-
-import fr.istic.sir.rest.DAOImplement.ParticipantDAOImpl;
 import jpa.EntityManagerHelper;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -15,7 +13,7 @@ import java.util.List;
 @Path("/Participant")
 public class ParticipantServ {
     private Participant participant;
-    private ParticipantDAOImpl participantDAO = new ParticipantDAOImpl();
+    private Participant participantDAO = new Participant();
     EntityManagerHelper entityManagerHelper = new EntityManagerHelper();
     EntityManager entityManager = entityManagerHelper.getEntityManager();
     public ParticipantServ() {

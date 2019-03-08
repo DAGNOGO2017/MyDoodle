@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import test.testjpa.domain.Createur;
-import test.testjpa.domain.Reunion;
-import test.testjpa.domain.Utilisateur;
-
 @WebServlet(name="createurinfo",
         urlPatterns={"/CreateurInfo"})
 

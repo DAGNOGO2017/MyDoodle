@@ -1,27 +1,30 @@
 package fr.istic.sir.rest;
 
+import fr.istic.sir.rest.DAOImplement.ParticipantDAOImpl;
 import jpa.EntityManagerHelper;
-import test.testjpa.domain.Createur;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import test.testjpa.domain.Participant;
-import test.testjpa.domain.Utilisateur;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-
+@JsonAutoDetect
+@JsonIgnoreProperties
 @Path("/Participant")
 public class ParticipantServ {
-    private Utilisateur participant;
+    private Participant participant;
+    private ParticipantDAOImpl participantDAO = new ParticipantDAOImpl();
     EntityManagerHelper entityManagerHelper = new EntityManagerHelper();
     EntityManager entityManager = entityManagerHelper.getEntityManager();
     public ParticipantServ() {
         super();
         this.participant = new Participant();
     }
+
     @GET
-    @Path("/users")
+    @Path("/participant")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Participant> list(){
         Participant participant = new Participant();
@@ -36,31 +39,45 @@ public class ParticipantServ {
     @GET
     @Path("/participant/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Participant rechercher(@PathParam("id") Long id){
+    public Participant Search(@PathParam("id") String id){
         Participant participant = new Participant();
         entityManagerHelper.beginTransaction();
-        participant=entityManager.find(Participant.class, id);
+        participant=entityManager.find(Participant.class, Integer.parseInt(id) );
         entityManagerHelper.closeEntityManager();
         return participant;
     }
 
-    @DELETE @Path("supprimer/{id}")
+    @DELETE @Path("delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public  void supprimer(@PathParam("id") int id){
-        Utilisateur participant = new Participant();
+    public  void Delete(@PathParam("id") String id){
+        Participant participant = new Participant();
         entityManagerHelper.beginTransaction();
-        participant=entityManager.find(Participant.class, id);
+        participant=entityManager.find(Participant.class, Integer.parseInt(id));
         entityManager.remove(participant);
+        entityManagerHelper.commit();
         entityManagerHelper.closeEntityManager();
 
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("add/")
     @Consumes (MediaType.APPLICATION_JSON)
-    public  void creer(Participant participant){
+    @Produces(MediaType.APPLICATION_JSON)
+    public  void Add(Participant participant){
         entityManagerHelper.beginTransaction();
-        entityManager.persist(participant);
+        entityManager.merge(participant);
+        entityManagerHelper.commit();
+        entityManagerHelper.closeEntityManager();
+
+    }
+
+    @PUT
+    @Path("update/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void  Update(Participant participant){
+        entityManagerHelper.beginTransaction();
+        entityManager.merge(participant);
+        entityManagerHelper.commit();
         entityManagerHelper.closeEntityManager();
 
     }

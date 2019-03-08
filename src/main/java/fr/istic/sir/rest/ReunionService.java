@@ -1,52 +1,54 @@
 package fr.istic.sir.rest;
 
 import jpa.EntityManagerHelper;
-import test.testjpa.domain.Allergie;
+import test.testjpa.domain.Reunion;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-
-@Path("/Allergie")
-public class AllergieService {
-    private Allergie allergie;
+@Path("/Reunion")
+public class ReunionService {
+    private Reunion reunion;
     EntityManagerHelper entityManagerHelper = new EntityManagerHelper();
     EntityManager entityManager = entityManagerHelper.getEntityManager();
-    public AllergieService() {
+
+    public ReunionService() {
         super();
-        this.allergie = new Allergie();
+        this.reunion = new Reunion();
     }
+
     @GET
-    @Path("/allergie")
+    @Path("/reunion")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Allergie> list(){
-        Allergie allergie = new Allergie();
+    public List<Reunion> list() {
+        Reunion reunion = new Reunion();
         entityManagerHelper.beginTransaction();
-        String req = "Select a from Allergie a";
-        Query query = entityManager.createQuery(req,Allergie.class );
-        List<Allergie> allergies = (List<Allergie>) query.getResultList();
-        return allergies;
+        String req = "Select r from Reunion r";
+        Query query = entityManager.createQuery(req, Reunion.class);
+        List<Reunion> reunions = (List<Reunion>) query.getResultList();
+        return reunions;
     }
+
     @GET
-    @Path("/allergie/{id}")
+    @Path("/reunion/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Allergie Search(@PathParam("id") String id) {
-        Allergie allergie = new Allergie();
+    public Reunion Search(@PathParam("id") String id) {
+        Reunion reunion = new Reunion();
         entityManagerHelper.beginTransaction();
-        allergie = entityManager.find(Allergie.class, Integer.parseInt(id));
+        reunion = entityManager.find(Reunion.class, Integer.parseInt(id));
         entityManagerHelper.closeEntityManager();
-        return allergie;
+        return reunion;
     }
 
     @DELETE
     @Path("delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public void Delete(@PathParam("id") String id) {
-        Allergie allergie = new Allergie();
+        Reunion reunion = new Reunion();
         entityManagerHelper.beginTransaction();
-        allergie = entityManager.find(Allergie.class, Integer.parseInt(id));
-        entityManager.remove(allergie);
+        reunion = entityManager.find(Reunion.class, Integer.parseInt(id));
+        entityManager.remove(reunion);
         entityManagerHelper.commit();
         entityManagerHelper.closeEntityManager();
 
@@ -56,9 +58,9 @@ public class AllergieService {
     @Path("add/")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void Add(Allergie allergie) {
+    public void Add(Reunion reunion) {
         entityManagerHelper.beginTransaction();
-        entityManager.merge(allergie);
+        entityManager.merge(reunion);
         entityManagerHelper.commit();
         entityManagerHelper.closeEntityManager();
 
@@ -67,11 +69,11 @@ public class AllergieService {
     @PUT
     @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_JSON})
-    public void Update(Allergie allergie) {
+    public void Update(Reunion reunion) {
         entityManagerHelper.beginTransaction();
-        entityManager.merge(allergie);
+        entityManager.merge(reunion);
         entityManagerHelper.commit();
         entityManagerHelper.closeEntityManager();
     }
-}
 
+}

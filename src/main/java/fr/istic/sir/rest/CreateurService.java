@@ -1,52 +1,57 @@
 package fr.istic.sir.rest;
 
 import jpa.EntityManagerHelper;
-import test.testjpa.domain.Allergie;
+import test.testjpa.domain.Createur;
+import test.testjpa.domain.Utilisateur;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/Allergie")
-public class AllergieService {
-    private Allergie allergie;
+@Path("/Createur")
+public class CreateurService {
+    private Utilisateur createur;
     EntityManagerHelper entityManagerHelper = new EntityManagerHelper();
     EntityManager entityManager = entityManagerHelper.getEntityManager();
-    public AllergieService() {
+
+    public CreateurService() {
         super();
-        this.allergie = new Allergie();
+        this.createur = new Createur();
     }
+
     @GET
-    @Path("/allergie")
+    @Path("/createur")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Allergie> list(){
-        Allergie allergie = new Allergie();
+    public List<Createur> list() {
+        Createur createur = new Createur();
         entityManagerHelper.beginTransaction();
-        String req = "Select a from Allergie a";
-        Query query = entityManager.createQuery(req,Allergie.class );
-        List<Allergie> allergies = (List<Allergie>) query.getResultList();
-        return allergies;
+        String req = "Select c from Createur c";
+        Query query = entityManager.createQuery(req, Createur.class);
+        List<Createur> createurs = (List<Createur>) query.getResultList();
+        return createurs;
     }
+
     @GET
-    @Path("/allergie/{id}")
+    @Path("/createur/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Allergie Search(@PathParam("id") String id) {
-        Allergie allergie = new Allergie();
+    public Createur Search(@PathParam("id") String id) {
+        Createur createur = new Createur();
         entityManagerHelper.beginTransaction();
-        allergie = entityManager.find(Allergie.class, Integer.parseInt(id));
+        createur = entityManager.find(Createur.class, Integer.parseInt(id));
         entityManagerHelper.closeEntityManager();
-        return allergie;
+        return createur;
     }
 
     @DELETE
     @Path("delete/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public void Delete(@PathParam("id") String id) {
-        Allergie allergie = new Allergie();
+        Createur createur = new Createur();
         entityManagerHelper.beginTransaction();
-        allergie = entityManager.find(Allergie.class, Integer.parseInt(id));
-        entityManager.remove(allergie);
+        createur = entityManager.find(Createur.class, Integer.parseInt(id));
+        entityManager.remove(createur);
         entityManagerHelper.commit();
         entityManagerHelper.closeEntityManager();
 
@@ -56,9 +61,9 @@ public class AllergieService {
     @Path("add/")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void Add(Allergie allergie) {
+    public void Add(Createur createur) {
         entityManagerHelper.beginTransaction();
-        entityManager.merge(allergie);
+        entityManager.merge(createur);
         entityManagerHelper.commit();
         entityManagerHelper.closeEntityManager();
 
@@ -67,11 +72,11 @@ public class AllergieService {
     @PUT
     @Path("update/{id}")
     @Consumes({MediaType.APPLICATION_JSON})
-    public void Update(Allergie allergie) {
+    public void Update(Createur createur) {
         entityManagerHelper.beginTransaction();
-        entityManager.merge(allergie);
+        entityManager.merge(createur);
         entityManagerHelper.commit();
         entityManagerHelper.closeEntityManager();
     }
-}
 
+}

@@ -32,10 +32,10 @@ public abstract class Utilisateur {
  		  inverseJoinColumns = @JoinColumn(name = "id"))
     private Collection<Sondage> sondages;
     
-    @OneToMany(mappedBy="utilisateur" , cascade=CascadeType.PERSIST)
+    @OneToMany(mappedBy="utilisateur" , cascade=CascadeType.ALL)
     private Collection<Allergie> allergies;
     
-    @OneToMany(mappedBy="utilisateur" , cascade=CascadeType.PERSIST)
+    @OneToMany(mappedBy="utilisateur" , cascade=CascadeType.ALL)
     private Collection<PreferenceAlimentaire> preferenceAlimentaires;
     
     

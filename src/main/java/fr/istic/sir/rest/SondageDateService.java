@@ -1,14 +1,10 @@
 package fr.istic.sir.rest;
 
 import jpa.EntityManagerHelper;
-import test.testjpa.domain.Allergie;
 import test.testjpa.domain.SondageDate;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -31,6 +27,52 @@ public class SondageDateService {
         Query query = entityManager.createQuery(req,SondageDate.class );
         List<SondageDate> sondageDates = (List<SondageDate>) query.getResultList();
         return sondageDates;
+    }
+    @GET
+    @Path("/sondadeDate/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public SondageDate Search(@PathParam("id") String id){
+        SondageDate sondageDate = new SondageDate();
+        entityManagerHelper.beginTransaction();
+        sondageDate=entityManager.find(SondageDate.class, Integer.parseInt(id) );
+        entityManagerHelper.closeEntityManager();
+        return sondageDate;
+    }
+
+    @DELETE
+    @Path("delete/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public  void Delete(@PathParam("id") String id){
+        SondageDate sondageDate = new SondageDate();
+        entityManagerHelper.beginTransaction();
+        sondageDate=entityManager.find(SondageDate.class, Integer.parseInt(id));
+        entityManager.remove(sondageDate);
+        entityManagerHelper.commit();
+        entityManagerHelper.closeEntityManager();
+
+    }
+
+    @POST
+    @Path("Add/")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes (MediaType.APPLICATION_JSON)
+    public  void Add(SondageDate sondageDate){
+        entityManagerHelper.beginTransaction();
+        entityManager.merge(sondageDate);
+        entityManagerHelper.commit();
+        entityManagerHelper.closeEntityManager();
+
+    }
+
+    @PUT
+    @Path("update/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void  Update(SondageDate sondageDate){
+        entityManagerHelper.beginTransaction();
+        entityManager.merge(sondageDate);
+        entityManagerHelper.commit();
+        entityManagerHelper.closeEntityManager();
+
     }
 
 }

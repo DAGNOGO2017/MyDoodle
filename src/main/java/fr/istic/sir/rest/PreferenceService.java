@@ -5,9 +5,7 @@ import test.testjpa.domain.PreferenceAlimentaire;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -30,6 +28,51 @@ public class PreferenceService {
         Query query = entityManager.createQuery(req,PreferenceAlimentaire.class );
         List<PreferenceAlimentaire> preferenceAlimentaires = (List<PreferenceAlimentaire>) query.getResultList();
         return preferenceAlimentaires;
+    }
+    @GET
+    @Path("/preference/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PreferenceAlimentaire Search(@PathParam("id") String id) {
+        PreferenceAlimentaire preferenceAlimentaire = new PreferenceAlimentaire();
+        entityManagerHelper.beginTransaction();
+        preferenceAlimentaire = entityManager.find(PreferenceAlimentaire.class, Integer.parseInt(id));
+        entityManagerHelper.closeEntityManager();
+        return preferenceAlimentaire;
+    }
+
+    @DELETE
+    @Path("delete/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public void Delete(@PathParam("id") String id) {
+        PreferenceAlimentaire preferenceAlimentaire = new PreferenceAlimentaire();
+        entityManagerHelper.beginTransaction();
+        preferenceAlimentaire = entityManager.find(PreferenceAlimentaire.class, Integer.parseInt(id));
+        entityManager.remove(preferenceAlimentaire);
+        entityManagerHelper.commit();
+        entityManagerHelper.closeEntityManager();
+
+    }
+
+    @POST
+    @Path("add/")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void Add(PreferenceAlimentaire preferenceAlimentaire) {
+        entityManagerHelper.beginTransaction();
+        entityManager.merge(preferenceAlimentaire);
+        entityManagerHelper.commit();
+        entityManagerHelper.closeEntityManager();
+
+    }
+
+    @PUT
+    @Path("update/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void Update(PreferenceAlimentaire preferenceAlimentaire) {
+        entityManagerHelper.beginTransaction();
+        entityManager.merge(preferenceAlimentaire);
+        entityManagerHelper.commit();
+        entityManagerHelper.closeEntityManager();
     }
 }
 

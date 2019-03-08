@@ -1,6 +1,6 @@
 ﻿# Titre du projet
 
-Ce projet s'intitule **MyDoodleApplication**. 
+Ce projet s'intitule **MyDoodle**. 
 
 ## But du projet
 
@@ -43,17 +43,17 @@ Les tests automatisés restent encore à faire.
 
 Ce projet a été réalisé par des étudiants de Master 1 MIAGE.
 Il s'agit :
-* **Hermann Egny**
-* **Chris Ouattara**
-
-En collaboration avec le groupe composé de :
 * **Kiko Dagnogo**
 * **Anderson Konan**
+
+En collaboration avec le groupe composé de :
+* **Hermann Egny**
+* **Chris Ouattara**
 
 Sur les points suivants :
 * la modélisation du problème
 * le mapping objet-relationnel
-* les fichiers README.md et designer.md
+* les fichiers README.md et design.md
 
 Motifs de la collaboration :
 * réaliser une modélisation qui se rapproche au mieux du problème posé
@@ -73,17 +73,18 @@ Ce projet est de type Open-Source.
 
 **2.a. Quelles sont les types de données stockés dans Redis ?**
 
+* Hash
+* Sets 
 * Les chaines de caractères
 * Les valeurs simples
 * Les listes
-* Hash
-* Sets 
 * Sets triés.
 
 **2.b. Que peut-on faire comme types de requêtes ?**
 
-* Les requêtes de projection : il s’agit de ne conserver que les champs intéressants
-* Les requêtes de sélection : on ne conserve que les enregistrements intéressants 
-* Les requêtes de jointure : on remet ensemble des données situées dans différentes tables.
+* Les requêtes de projection qui ne conservent que les champs intéressants.
+* Les requêtes de jointure qui permettent de mettre en relation des données situées dans différentes tables.
+* Les requêtes de sélection qui ne conservent que les enregistrements intéressants.
+
 
 ```

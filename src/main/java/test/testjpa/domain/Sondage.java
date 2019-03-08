@@ -3,17 +3,7 @@ package test.testjpa.domain;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Sondage")
@@ -28,7 +18,8 @@ public abstract class Sondage {
 	@Column(name = "libelle")
 	private String libelleSondage;
 	@Column(name = "datescloture")
-	private Date dateCloture;
+	@Temporal(TemporalType.DATE)
+	private String dateCloture;
 	@Column(name = "type")
 	private String type;
 	
@@ -58,12 +49,14 @@ public abstract class Sondage {
 		this.id = id;
 	}
 
-	public Date getDateCloture() {
+	public String getDateCloture() {
 		return dateCloture;
 	}
-	public void setDateCloture(Date dateCloture) {
+
+	public void setDateCloture(String dateCloture) {
 		this.dateCloture = dateCloture;
 	}
+
 	public String getType() {
 		return type;
 	}

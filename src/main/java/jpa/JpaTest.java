@@ -55,36 +55,36 @@ public class JpaTest {
 	}
 
 	private void createDatas() {
-		
+
 			Utilisateur utilisateur1 = new Createur();
 			utilisateur1.setNom("DAGNOGO");
 			utilisateur1.setPrenom("kiko");
 			//utilisateur1.setEmail("kikodagnogo@gmail.com");
 			manager.persist(utilisateur1);
-			
+
 			Participant utilisateur2 = new Participant();
 			utilisateur2.setNom("KONAN");
 			utilisateur2.setPrenom("ANDERSON");
 			utilisateur2.setEmailUtilisateur("andersonkonan@gmail.com");
 			manager.persist(utilisateur2);
-			
+
 			LieuReunion lieu1 = new LieuReunion();
-			lieu1.setLibelleLieu("Rennes"); 
+			lieu1.setLibelleLieu("Rennes");
 			manager.persist(lieu1);
-			
+
 			LieuReunion lieu2 = new LieuReunion();
-			lieu2.setLibelleLieu("Nantes"); 
+			lieu2.setLibelleLieu("Nantes");
 			manager.persist(lieu2);
 			List<LieuReunion> listLieux = new ArrayList<LieuReunion>();
 			listLieux.add(lieu1);
 			//listLieux.add(lieu2);
 			SondageLieu sondageLieu = new SondageLieu();
 			sondageLieu.setListeLieux(listLieux);
-			
+
 			Dates date1 = new Dates();
 			date1.setLibelleDate("05-02-2018");
 			manager.persist(date1);
-			
+
 			Dates date2 = new Dates();
 			date2.setLibelleDate("24-12-2017");
 			manager.persist(date2);
@@ -93,56 +93,56 @@ public class JpaTest {
 			listeDate.add(date2);
 			SondageDate sondageDate = new SondageDate();
 			sondageDate.setListeDate(listeDate);
-			
-			
+
+
 			Allergie allergie = new Allergie();
 			allergie.setLibelleAllergie("Doliprane");
 			allergie.setUtilisateur(utilisateur1);
 			manager.persist(allergie);
-			
+
 			Allergie allergie1 = new Allergie();
 			allergie1.setLibelleAllergie("paracétamol");
 			allergie1.setUtilisateur(utilisateur2);
 			manager.persist(allergie1);
-			
+
 			Allergie allergie2 = new Allergie();
 			allergie2.setLibelleAllergie("Quinine");
 			allergie2.setUtilisateur(utilisateur1);
 			manager.persist(allergie2);
-			
+
 			PreferenceAlimentaire preference1 = new PreferenceAlimentaire();
 			preference1.setLibellePreferenceAlimentaire("FOUTOU");
 			preference1.setUtilisateur(utilisateur2);
 			manager.persist(preference1);
-			
+
 			PreferenceAlimentaire preference2 = new PreferenceAlimentaire();
 			preference2.setLibellePreferenceAlimentaire("ATTIEKE");
 			preference2.setUtilisateur(utilisateur1);
 			manager.persist(preference2);
-			
+
 			Sondage sondage1 = new SondageDate();
 			sondage1.setLibelleSondage("Sondage sur la date");
 			sondage1.setType("poissons");
 			manager.persist(sondage1);
-			
+
 			Sondage sondage2 = new SondageLieu();
 			sondage2.setLibelleSondage("Sondage sur le lieu");
 			sondage2.setType("Viande");
 			manager.persist(sondage2);
-			
+
 			Reunion reunion = new Reunion();
 			reunion.setIntitule("Les gestes ecologiques");
 			reunion.setResume("Il faut toujours faire le tri des ordures ménagères");
 			reunion.setSondage(sondage2);
 			manager.persist(reunion);
-			
+
 			Reunion reunion1 = new Reunion();
 			reunion1.setIntitule("Les gestes ecologiques");
 			reunion1.setResume("Il faut toujours faire le tri des ordures ménagères");
 			reunion1.setSondage(sondage1);
 			manager.persist(reunion1);
-			
-			
+
+
 	}
 	private void listUser() {
         List<Utilisateur> resultList = manager.createQuery("Select u From Utilisateur u", Utilisateur.class).getResultList();

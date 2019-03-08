@@ -8,13 +8,8 @@
 </head>
 <body>
 <div class="container">
-<h1>Doodle</h1>
-<form Method="POST" Action="/UtilisateurInfo">
-    <div class="form-row">
-        <div class="col-md-4 mb-3">
-            <input type="text" class="form-control" placeholder="Intitulé" name="intitule">
-        </div>
-    </div>
+    <h1>Doodle</h1>
+    <form Method="POST" Action="/ParticipantInfo">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control" placeholder="First name" name="name">
@@ -25,24 +20,19 @@
                 <input type="text" class="form-control" placeholder="Last name" name="firstname">
             </div>
         </div>
-    <div class="form-group shadow-textarea">
-        <label for="exampleFormControlTextarea6">Résumé</label>
-        <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" cols="0" rows="5"
-                  name="resume" placeholder="Write something here..."></textarea>
-    </div>
         <div class="form-row">
-             <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3">
                 <input type="text" class="form-control" placeholder="Email" name="email">
             </div>
         </div>
 
 
 
-    <p>
-        <button type=submit class="btn btn-danger" >Cancel</button>
-        <button class="btn btn-success" type=submit >Send</button>
-    </p>
-</form>
+        <p>
+            <button type=submit class="btn btn-danger" >Cancel</button>
+            <button class="btn btn-success" type=submit >Send</button>
+        </p>
+    </form>
 </div>
 </body>
 </html>
